@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/gautamsharma/Desktop/cpp_prc/Astar/algorithm.hpp
+tuple
+-
+cmath
+-
+vector
+-
+functional
+-
+queue
+-
+algorithm
+-
+
+/Users/gautamsharma/Desktop/cpp_prc/Astar/main.cpp
+iostream
+-
+algorithm.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/algorithm.hpp
+
