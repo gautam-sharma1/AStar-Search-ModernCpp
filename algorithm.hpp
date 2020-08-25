@@ -1,3 +1,26 @@
+/*
+* A-star algorithm
+* See COPYRIGHT file at the top of the source tree.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the LSST License Statement and
+* the GNU General Public License along with this program. If not,
+* see <http://www.lsstcorp.org/LegalNotices/>.
+*
+* @file algorithm.hpp
+* @author Gautam Sharma
+* Contact: gautamsharma2813@gmail.com
+*/
+
 #ifndef algorithm_hpp
 #define algorithm_hpp
 #include <tuple>
@@ -15,6 +38,7 @@
 #include <opencv2/objdetect.hpp>
 
 #include <opencv2/imgproc.hpp>
+#include "draw.hpp"
 using namespace cv;
 
 // struct Point
@@ -40,13 +64,13 @@ struct my_point
 /*
 Heuristic funtion. Should be modified according to the problem.
 */
-double Heuristic(PointI a, PointI b)
+double Heuristic(const PointI &a, const PointI &b)
 {
-    return 30*std::sqrt((std::get<0>(a) - std::get<0>(b)) ^ 2 + (std::get<1>(a) - std::get<1>(b)) ^ 2);
+    return  10*std::sqrt(((std::get<0>(a) - std::get<0>(b))^2  + (std::get<1>(a) - std::get<1>(b))^2 ));
 };
 
 
-inline static PointI goal = std::make_tuple(10, 10); // Goal position. Static so can be modified from main
+inline static PointI goal = std::make_tuple(10,0); // Goal position. Static so can be modified from main
 
 
 /*
@@ -98,11 +122,13 @@ public:
                         PointI p_new = std::make_tuple(std::get<0>(p) + x, std::get<1>(p) + y);                       
 
 
-                        poi.push_back({std::get<0>(p), std::get<1>(p)});
-                        optimal_path[p_new] = poi;
 
                         if (IsLegal(p_new) && std::find(_history.begin(), _history.end(), p_new) == _history.end())
+
                         {
+                            
+                            poi.push_back({std::get<0>(p), std::get<1>(p)});
+                            optimal_path[p_new] = poi;
                             my_point temp;
                             temp.p = p_new;
                             temp.cost += _cost;
@@ -127,25 +153,27 @@ public:
     void Implementation()
     {
         Mat Picture(320, 240, CV_8UC3, cv::Scalar(0, 0, 0));
-         // Check for failure
-        if (Picture.empty())
-        {
-            std::cout << "Could not instantiate the image" << std::endl;
-            std::cin.get(); //wait for any key press
-        }
-        resize(Picture, Picture, Size(500, 500));
+        //  // Check for failure
+        // if (Picture.empty())
+        // {
+        //     std::cout << "Could not instantiate the image" << std::endl;
+        //     std::cin.get(); //wait for any key press
+        // }
+        // resize(Picture, Picture, Size(600, 600));
 
-        circle(Picture, Point(300, 300), 20, Scalar(255, 255, 0), 2, 8, 0);
+        // circle(Picture, Point(std::get<0>(goal)*30, std::get<1>(goal)*30), 20, Scalar(255, 255, 0), 2, 8, 0);
+        Draw d(Picture);
         Movement(_starting_pos);
         my_point temp = PQueue.top();
         while (temp.p != goal)
         {
             temp = PQueue.top();
-            auto x = std::get<0>(temp.p)*30;
-            auto y = std::get<1>(temp.p)*30;
-            circle(Picture, Point(x, y), 20, Scalar(0, 255, 0), 2, 8, 0);
-            imshow("A* Search", Picture);
-            waitKey(50);
+            d.Simulation(temp.p);
+            //auto x = std::get<0>(temp.p)*30;
+            //auto y = std::get<1>(temp.p)*30;
+            // circle(Picture, Point(x, y), 20, Scalar(0, 255, 0), 2, 8, 0);
+            // imshow("A* Search", Picture);
+            // waitKey(50);
 
 
             PQueue.pop();
@@ -155,15 +183,15 @@ public:
             std::vector<std::vector<int>> path = optimal_path[temp.p];
             std::vector<std::vector<int> >::iterator itr = std::unique(path.begin(), path.end());
             path.resize(std::distance(path.begin(), itr));
-            if(x==300 && y==300){
-            for (auto itr = path.begin(); itr != path.end(); ++itr)
-            {
-                circle(Picture, Point((*itr).at(0)*30, (*itr).at(1)*30), 20, Scalar(0, 0, 255), 2, 8, 0);
-                waitKey(100);
-                imshow("A* Search", Picture);
-            }
-          
-            } 
+            // if(x/30==std::get<0>(goal) && y/30==std::get<1>(goal)){
+            // for (auto itr = path.begin(); itr != path.end(); ++itr)
+            // {
+            //     circle(Picture, Point((*itr).at(0)*30, (*itr).at(1)*30), 20, Scalar(0, 0, 255), 2, 8, 0);
+            //     waitKey(100);
+            //     imshow("A* Search", Picture);
+            // }
+
+            // } 
             for (auto itr = path.begin(); itr != path.end(); ++itr)
             {
 
