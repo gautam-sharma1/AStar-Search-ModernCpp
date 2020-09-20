@@ -66,7 +66,7 @@ double Heuristic(const PointI &a, const PointI &b)
 };
 
 
-inline static PointI goal = std::make_tuple(10,7); // Goal position. Static so can be modified from main
+static PointI goal ;//= std::make_tuple(10,7); // Goal position. Static so can be modified from main
 
 
 /*
@@ -143,13 +143,13 @@ public:
         return x;
     }
     inline static void SetGoal(const int &z,const int &y){
-        x = std::make_tuple(z,y);
+        goal = std::make_tuple(z,y);
     }
 
     void Implementation()
     {
         Mat Picture(320, 240, CV_8UC3, cv::Scalar(0, 0, 0));
-        Draw d(Picture); // initializes opencv window
+        Draw d(Picture, goal); // initializes opencv window
         Movement(_starting_pos);
         my_point temp = PQueue.top();
         while (temp.p != goal)
@@ -158,7 +158,7 @@ public:
             d.Simulation(temp.p);
             PQueue.pop();
             Movement(temp.p);
-            std::cout << std::get<0>(temp.p) << " " << std::get<1>(temp.p) << std::endl;
+            std::cout <<"Path taken to reach:"<< std::get<0>(temp.p) << " " << std::get<1>(temp.p) << std::endl;
 
             std::vector<std::vector<int>> path = optimal_path[temp.p];
             std::vector<std::vector<int> >::iterator itr = std::unique(path.begin(), path.end());
@@ -171,7 +171,7 @@ public:
             }
             std::cout<<std::endl;
         }
-        destroyWindow("Path planner Reinforcement-Learning");
+        destroyWindow("Path planner A-Star");
     };
     //inline static PointI goal = std::make_tuple(10, 10); //Default goal of the Astar problem
 

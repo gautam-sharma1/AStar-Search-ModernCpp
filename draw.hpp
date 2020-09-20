@@ -16,7 +16,7 @@ using PointI = std::tuple<int, int>;
 class Draw
 {
 public:
-    explicit Draw(Mat Picture)
+    explicit Draw(Mat Picture, const PointI &goal)
     {
         _Picture = Picture;
 
@@ -27,7 +27,7 @@ public:
             std::cin.get(); //wait for any key press
         }
         resize(_Picture, _Picture, Size(600, 600));
-        PointI temp_goal = std::make_tuple(10,7);//Astar::GetGoal();
+        temp_goal = goal;
         circle(_Picture, Point(std::get<0>(temp_goal) * _scale_factor, std::get<0>(temp_goal) * _scale_factor), 5, Scalar(255, 255, 0), 2, 8, 0); // plots goal position
         //line(_Picture, Point(10 * 30, 0 * 30), Point pt2, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
     }
@@ -47,7 +47,7 @@ public:
         auto x = std::get<0>(point) * _scale_factor;
         auto y = std::get<1>(point) * _scale_factor;
         //using _sf = _scale_factor;
-        if (x / _scale_factor == 10 && y / _scale_factor == 7)
+        if (x / _scale_factor == std::get<0>(temp_goal) && y / _scale_factor == std::get<1>(temp_goal))
         {
             for (auto itr = path.begin(); itr != path.end(); ++itr)
             {
@@ -61,6 +61,7 @@ public:
 private:
     inline static Mat _Picture;
     const static int _scale_factor{30};
+     PointI temp_goal;
 };
 // static void Draw (Mat &Picture, PointI point){
 
