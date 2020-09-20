@@ -2,25 +2,24 @@
 #define draw_hpp
 
 #include <opencv2/core.hpp>
+//#include "Astar.hpp"
 #include <opencv2/highgui.hpp>
-
 #include <opencv2/videoio.hpp>
-
 #include <opencv2/objdetect.hpp>
-
 #include <opencv2/imgproc.hpp>
 #include <tuple>
 #include <memory>
 
 using namespace cv;
-using PointI = std::tuple<int, int>;
 
+using PointI = std::tuple<int, int>;
 class Draw
 {
 public:
     explicit Draw(Mat Picture)
     {
         _Picture = Picture;
+
         // Check for failure
         if (Picture.empty())
         {
@@ -28,24 +27,40 @@ public:
             std::cin.get(); //wait for any key press
         }
         resize(_Picture, _Picture, Size(600, 600));
-
-        circle(_Picture, Point(10 * 30, 0 * 30), 20, Scalar(255, 255, 0), 2, 8, 0);
+        PointI temp_goal = std::make_tuple(10,7);//Astar::GetGoal();
+        circle(_Picture, Point(std::get<0>(temp_goal) * _scale_factor, std::get<0>(temp_goal) * _scale_factor), 5, Scalar(255, 255, 0), 2, 8, 0); // plots goal position
+        //line(_Picture, Point(10 * 30, 0 * 30), Point pt2, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
     }
 
     static void Simulation(PointI point)
-    {
-        auto x = std::get<0>(point) * 30;
-        auto y = std::get<1>(point) * 30;
-        circle(_Picture, Point(x, y), 20, Scalar(0, 255, 0), 2, 8, 0);
+    { //using _sf = _scale_factor;
+        auto x = std::get<0>(point) * _scale_factor;
+        auto y = std::get<1>(point) * _scale_factor;
+        circle(_Picture, Point(x, y), 5, Scalar(0, 255, 0), 2, 8, 0);
+        //line(_Picture, Point(10 * 30, 0 * 30), Point pt2, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
         imshow("A* Search", _Picture);
         waitKey(50);
     }
 
-    static void Check_Goal(PointI point, std::vector<std::vector<int>> path)
+    void Draw_Path(PointI point, const std::vector<std::vector<int>> &path)
     {
+        auto x = std::get<0>(point) * _scale_factor;
+        auto y = std::get<1>(point) * _scale_factor;
+        //using _sf = _scale_factor;
+        if (x / _scale_factor == 10 && y / _scale_factor == 7)
+        {
+            for (auto itr = path.begin(); itr != path.end(); ++itr)
+            {
+                circle(_Picture, Point((*itr).at(0) * _scale_factor, (*itr).at(1) * _scale_factor), 5, Scalar(0, 0, 255), 2, 8, 0);
+                waitKey(100);
+                imshow("A* Search", _Picture);
+            }
+        }
     }
 
-    static void Goal_Check() private : inline static Mat _Picture;
+private:
+    inline static Mat _Picture;
+    const static int _scale_factor{30};
 };
 // static void Draw (Mat &Picture, PointI point){
 

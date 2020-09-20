@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/gautamsharma/Desktop/cpp_prc/Astar/algorithm.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/Astar.hpp
 tuple
 -
 cmath
@@ -21,6 +21,8 @@ queue
 -
 algorithm
 -
+draw.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/draw.hpp
 opencv2/core.hpp
 -
 opencv2/highgui.hpp
@@ -31,8 +33,6 @@ opencv2/objdetect.hpp
 -
 opencv2/imgproc.hpp
 -
-draw.hpp
-/Users/gautamsharma/Desktop/cpp_prc/Astar/draw.hpp
 
 /Users/gautamsharma/Desktop/cpp_prc/Astar/draw.hpp
 opencv2/core.hpp
@@ -53,8 +53,8 @@ memory
 /Users/gautamsharma/Desktop/cpp_prc/Astar/main.cpp
 iostream
 -
-algorithm.hpp
-/Users/gautamsharma/Desktop/cpp_prc/Astar/algorithm.hpp
+Astar.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/Astar.hpp
 draw.hpp
 /Users/gautamsharma/Desktop/cpp_prc/Astar/draw.hpp
 
