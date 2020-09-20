@@ -8,13 +8,6 @@ To define an A* agent.
 Let's say you want to solve a path planning problem with the help of A*. You want to reach a goal coordinate of (x,y). You can train an agent to reach this goal using the following code. 
 ```cpp
 #include <iostream>
-#include <vector>
-#include "algorithms.hpp"
-#include "logic.hpp"
-#include "player.hpp"
-int main(int argc, const char *argv[])
-{
-   #include <iostream>
 #include "Astar.hpp"
 #include "draw.hpp"
 
@@ -26,7 +19,6 @@ int main()
     A.SetGoal(9,9); // goal position of the agent
     A.Implementation(); // starts search loop
     return 0;
-}
 }
 
 ```
