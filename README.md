@@ -23,7 +23,7 @@ int main()
 }
 
 ```
-The following defines an A* agent with 2 state variables (x,y)
+The following defines an A* agent with 2 state variables (x,y) <br/>
 0<= x <= 10 <br/>
 0<= y <= 10 <br/>
 
@@ -39,10 +39,28 @@ The following function starts the path planning loop. <br/>
 A.Implementation()
 ```
 
+
 ## Example
 The A* algorithm also has real-world applications. In this example, edges are railroads and h(x) is the great-circle distance (the shortest possible distance on a sphere) to the target. The algorithm is searching for a path between Washington, D.C. and Los Angeles.
 
 ![https://en.wikipedia.org/wiki/A*_search_algorithm](Astar_ex.gif)
+
+## Heuristic 
+There are numerous heuristics that can be used in path planning algorithms. Use what is suitable for your problem. 
+```
+/*
+Heuristic funtion. Should be modified according to the problem.
+Current heuristic is (x1-x2)^2 + (y1-y2)^2
+*/
+double Heuristic(const PointI &a, const PointI &b)
+{
+    return 10 * std::sqrt(((std::get<0>(a) - std::get<0>(b)) ^ 2 + (std::get<1>(a) - std::get<1>(b)) ^ 2));
+};
+```
+## Complexity
+```
+
+```
 
 ## Contributing
 This repository is in it's beginning stages. The goal of this project is to use the speed and efficiency of C++ along with its modern syntax to provide a simple interface for the user to test his/her algorithms. If you feel you are interested in contributing please send me an email as I am still in the process of finalizing a "how to contribute?" guidelines. Thank you :)
