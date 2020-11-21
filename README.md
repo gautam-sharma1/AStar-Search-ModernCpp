@@ -39,6 +39,10 @@ The following function starts the path planning loop. <br/>
 A.Implementation()
 ```
 
+## Example
+The A* algorithm also has real-world applications. In this example, edges are railroads and h(x) is the great-circle distance (the shortest possible distance on a sphere) to the target. The algorithm is searching for a path between Washington, D.C. and Los Angeles.
+
+![https://en.wikipedia.org/wiki/A*_search_algorithm](Astar_ex.gif)
 
 ## Contributing
 This repository is in it's beginning stages. The goal of this project is to use the speed and efficiency of C++ along with its modern syntax to provide a simple interface for the user to test his/her algorithms. If you feel you are interested in contributing please send me an email as I am still in the process of finalizing a "how to contribute?" guidelines. Thank you :)
