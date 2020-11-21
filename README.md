@@ -58,7 +58,8 @@ double Heuristic(const PointI &a, const PointI &b)
 };
 ```
 ## Complexity
-<img src="Astar_comp.png" width="700" height="400" /> (Source : http://www.ai.mit.edu/courses/6.034b/searchcomplex.pdf)
+<img src="Astar_comp.png" width="700" height="200" /> <br/> 
+(Source : http://www.ai.mit.edu/courses/6.034b/searchcomplex.pdf)
 
 ## Contributing
 This repository is in it's beginning stages. The goal of this project is to use the speed and efficiency of C++ along with its modern syntax to provide a simple interface for the user to test his/her algorithms. If you feel you are interested in contributing please send me an email as I am still in the process of finalizing a "how to contribute?" guidelines. Thank you :)
