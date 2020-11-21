@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/gautamsharma/Desktop/cpp_prc/Astar/Astar.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/include/Astar.hpp
 tuple
 -
 cmath
@@ -22,7 +22,7 @@ queue
 algorithm
 -
 draw.hpp
-/Users/gautamsharma/Desktop/cpp_prc/Astar/draw.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/include/draw.hpp
 opencv2/core.hpp
 -
 opencv2/highgui.hpp
@@ -34,7 +34,7 @@ opencv2/objdetect.hpp
 opencv2/imgproc.hpp
 -
 
-/Users/gautamsharma/Desktop/cpp_prc/Astar/draw.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/include/draw.hpp
 opencv2/core.hpp
 -
 opencv2/highgui.hpp
@@ -50,13 +50,13 @@ tuple
 memory
 -
 
-/Users/gautamsharma/Desktop/cpp_prc/Astar/main.cpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/src/main.cpp
 iostream
 -
-Astar.hpp
-/Users/gautamsharma/Desktop/cpp_prc/Astar/Astar.hpp
-draw.hpp
-/Users/gautamsharma/Desktop/cpp_prc/Astar/draw.hpp
+../include/Astar.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/include/Astar.hpp
+../include/draw.hpp
+/Users/gautamsharma/Desktop/cpp_prc/Astar/include/draw.hpp
 
 /usr/local/Cellar/opencv/4.3.0_1/include/opencv4/opencv2/core.hpp
 opencv2/core/cvdef.h
