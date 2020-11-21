@@ -30,12 +30,12 @@ The following defines an A* agent with 2 state variables (x,y) <br/>
 
 The A.SetGoal() static function defines the goal coordinates of the agent.
 
-```
+```cpp
 A.SetGoal()
 ```
 The following function starts the path planning loop. <br/>
 
-```
+```cpp
 A.Implementation()
 ```
 
@@ -47,7 +47,7 @@ The A* algorithm also has real-world applications. In this example, edges are ra
 
 ## Heuristic 
 There are numerous heuristics that can be used in path planning algorithms. Use what is suitable for your problem. 
-```
+```cpp
 /*
 Heuristic funtion. Should be modified according to the problem.
 Current heuristic is (x1-x2)^2 + (y1-y2)^2
