@@ -1,8 +1,6 @@
 #ifndef draw_hpp
 #define draw_hpp
-
 #include <opencv2/core.hpp>
-//#include "Astar.hpp"
 #include <opencv2/highgui.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/objdetect.hpp>
@@ -13,6 +11,10 @@
 using namespace cv;
 
 using PointI = std::tuple<int, int>;
+
+/*
+Abstract class that takes care of openCV stuff for displaying search
+*/
 class Draw
 {
 public:
@@ -26,27 +28,27 @@ public:
             std::cout << "Could not instantiate the image" << std::endl;
             std::cin.get(); //wait for any key press
         }
-        resize(_Picture, _Picture, Size(600, 600));
+        resize(_Picture, _Picture, Size(600, 600)); // default size
         temp_goal = goal;
         circle(_Picture, Point(std::get<0>(temp_goal) * _scale_factor, std::get<0>(temp_goal) * _scale_factor), 5, Scalar(255, 255, 0), 2, 8, 0); // plots goal position
-        //line(_Picture, Point(10 * 30, 0 * 30), Point pt2, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
     }
 
     static void Simulation(PointI point)
-    { //using _sf = _scale_factor;
+    { 
         auto x = std::get<0>(point) * _scale_factor;
         auto y = std::get<1>(point) * _scale_factor;
         circle(_Picture, Point(x, y), 5, Scalar(0, 255, 0), 2, 8, 0);
-        //line(_Picture, Point(10 * 30, 0 * 30), Point pt2, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
         imshow("A* Search", _Picture);
         waitKey(50);
     }
-
+    
+    /*
+    Draws final path from start to goal
+    */
     void Draw_Path(PointI point, const std::vector<std::vector<int>> &path)
     {
-        auto x = std::get<0>(point) * _scale_factor;
+        auto x = std::get<0>(point) * _scale_factor; 
         auto y = std::get<1>(point) * _scale_factor;
-        //using _sf = _scale_factor;
         if (x / _scale_factor == std::get<0>(temp_goal) && y / _scale_factor == std::get<1>(temp_goal))
         {
             for (auto itr = path.begin(); itr != path.end(); ++itr)
@@ -61,9 +63,7 @@ public:
 private:
     inline static Mat _Picture;
     const static int _scale_factor{30};
-     PointI temp_goal;
+    PointI temp_goal;
 };
-// static void Draw (Mat &Picture, PointI point){
 
-// };
 #endif /* draw_hpp */
