@@ -2,6 +2,7 @@
 
 A library implementing A* algorithm with modern C++ syntax and using OpenCV for simulation
 
+![](Astar_sim.gif)
 ## Getting Started
 To define an A* agent.
 
